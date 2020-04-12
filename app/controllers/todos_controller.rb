@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
-  
   before_action :set_todo, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
   
     def new
       @todo = Todo.new
@@ -9,6 +9,7 @@ class TodosController < ApplicationController
     
     def create
       @todo = Todo.new(todo_params)
+      @todo.user = current_user
       if @todo.save
         flash[:success] = "Todo was successfully created"
         redirect_to todo_path(@todo)

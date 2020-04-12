@@ -9,11 +9,18 @@
           <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-left">
             <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to current_user.name if logged_in? %></li>
+            <!-- <li class="divider"></li> -->
           </ul>
          
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Create a To Do", new_todo_path %></li>
             <li><%= link_to "To Do List", todos_path %></li>
+            <% if logged_in? %>
+              <li><%= link_to "Log Out", login_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "log in", login_path %></li>
+            <% end %>
           </ul> 
           </div>
         </nav>
